@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mason Bleasdell | Luxury Real Estate in Austin & the Texas Hill Country</title>
+<meta name="description" content="Mason Bleasdell — Platinum Top 50 REALTOR® with Mark Martin and Company. 148+ closed sales and over $100M in career volume across Austin and the Texas Hill Country." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0c0d0f;
+    --bg-2:#131418;
+    --bg-3:#1a1c21;
+    --gold:#c4a563;
+    --gold-soft:#d8be8c;
+    --ink:#f3f1ec;
+    --muted:#9b958a;
+    --line:rgba(196,165,99,.22);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.1;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 0;transition:all .4s ease;border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(10,11,13,.92);backdrop-filter:blur(14px);padding:14px 0;border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.04em}
+  .brand span{color:var(--gold)}
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{border:1px solid var(--gold);color:var(--gold)!important;padding:11px 22px;border-radius:2px;transition:all .3s}
+  .nav-cta:hover{background:var(--gold);color:var(--bg)!important}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
+  .burger span{width:26px;height:1.5px;background:var(--ink);transition:.3s}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background-color:#0c0d0f;background-image:
+     linear-gradient(180deg,rgba(8,9,11,.55) 0%,rgba(8,9,11,.45) 40%,rgba(8,9,11,.88) 100%),
+     url('hero.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;
+     transform:scale(1.05);animation:slowzoom 22s ease-in-out infinite alternate}
+  @keyframes slowzoom{to{transform:scale(1.14)}}
+  .hero-content{position:relative;z-index:2;padding:0 24px;max-width:960px}
+  .hero h1{font-size:clamp(48px,8vw,104px);font-weight:500;margin:22px 0 8px;line-height:.98}
+  .hero h1 em{font-style:italic;color:var(--gold-soft)}
+  .hero-sub{font-size:clamp(15px,2vw,19px);font-weight:300;color:#e7e3da;letter-spacing:.02em;max-width:660px;margin:0 auto 38px}
+  .hero-cta{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .btn{font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:16px 34px;border-radius:2px;transition:all .3s;cursor:pointer;border:1px solid var(--gold)}
+  .btn-primary{background:var(--gold);color:var(--bg)}
+  .btn-primary:hover{background:var(--gold-soft);transform:translateY(-2px)}
+  .btn-ghost{color:var(--ink);background:transparent}
+  .btn-ghost:hover{background:rgba(196,165,99,.12)}
+  .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{50%{transform:translate(-50%,8px)}}
+
+  /* STATS */
+  .stats{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+  .stat{padding:54px 20px;border-right:1px solid rgba(255,255,255,.05)}
+  .stat:last-child{border-right:0}
+  .stat .num{font-family:var(--serif);font-size:clamp(38px,5vw,58px);color:var(--gold-soft);line-height:1}
+  .stat .lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+
+  /* SECTION */
+  section{padding:120px 0}
+  .sec-head{text-align:center;max-width:720px;margin:0 auto 70px}
+  .sec-head h2{font-size:clamp(34px,5vw,58px);margin:16px 0}
+  .sec-head p{color:var(--muted);font-size:16px}
+  .rule{width:54px;height:1px;background:var(--gold);margin:18px auto 0}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:center}
+  .about-photo{position:relative}
+  .about-photo img{width:100%;border-radius:2px;filter:grayscale(.15) contrast(1.02)}
+  .about-photo::after{content:"";position:absolute;inset:14px -14px -14px 14px;border:1px solid var(--gold);z-index:-1;border-radius:2px}
+  .about h2{font-size:clamp(32px,4.5vw,52px);margin:14px 0 26px}
+  .about p{color:#cfcabf;margin-bottom:20px;font-size:16px}
+  .about .sign{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--gold-soft);margin-top:8px}
+  .creds{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .cred{border:1px solid var(--line);padding:10px 18px;border-radius:2px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .cred b{color:var(--gold-soft);font-weight:500}
+
+  /* LISTINGS */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .card{background:var(--bg-2);border:1px solid rgba(255,255,255,.05);border-radius:3px;overflow:hidden;transition:transform .4s,border-color .4s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);border-color:var(--line)}
+  .card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#1d1f24,#2a2d34)}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+  .card:hover .card-img img{transform:scale(1.06)}
+  .card-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(135deg,#191b20,#23262d)}
+  .card-fallback .fa{font-family:var(--serif);font-size:22px;color:var(--gold-soft)}
+  .card-fallback .fc{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .badge{position:absolute;top:14px;left:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:7px 13px;border-radius:2px;background:rgba(10,11,13,.78);backdrop-filter:blur(4px);color:var(--ink);border:1px solid var(--line)}
+  .badge.sold{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  .card-body{padding:24px;display:flex;flex-direction:column;flex:1}
+  .card-price{font-family:var(--serif);font-size:30px;color:var(--ink)}
+  .card-price .sold-lbl{font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px}
+  .card-addr{font-size:15px;color:var(--ink);margin-top:6px}
+  .card-city{font-size:13px;color:var(--muted);margin-top:2px}
+  .card-specs{display:flex;gap:18px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);font-size:13px;color:var(--muted);letter-spacing:.04em}
+  .card-specs b{color:var(--ink);font-weight:500}
+  .card-link{margin-top:16px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:0;transform:translateY(4px);transition:all .3s}
+  .card:hover .card-link{opacity:1;transform:translateY(0)}
+  .listings-foot{text-align:center;margin-top:54px}
+
+  /* AWARDS strip */
+  .awards{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 0}
+  .awards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+  .award h4{font-size:22px;color:var(--gold-soft);margin-bottom:8px}
+  .award p{font-size:13px;color:var(--muted);letter-spacing:.04em}
+
+  /* CONTACT */
+  .contact{text-align:center}
+  .contact h2{font-size:clamp(36px,5vw,64px);margin:16px 0 18px}
+  .contact p{color:var(--muted);max-width:560px;margin:0 auto 40px;font-size:16px}
+  .contact-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
+  .social{display:flex;gap:26px;justify-content:center;margin-top:8px}
+  .social a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+  .social a:hover{color:var(--gold)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:46px 0;text-align:center}
+  .foot-brand{font-family:var(--serif);font-size:26px;letter-spacing:.04em}
+  .foot-brand span{color:var(--gold)}
+  .foot-meta{font-size:12px;color:var(--muted);letter-spacing:.04em;margin-top:14px;line-height:2}
+  .disclaimer{font-size:11px;color:#5f5b54;margin-top:18px;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.8}
+
+  /* MOBILE */
+  @media(max-width:900px){
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;background:var(--bg-2);flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:transform .4s;border-left:1px solid var(--line)}
+    .nav-links.open{transform:translateX(0)}
+    .burger{display:flex}
+    .about-grid{grid-template-columns:1fr;gap:44px}
+    .about-photo{max-width:420px;margin:0 auto}
+    .grid{grid-template-columns:1fr 1fr}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:0}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid rgba(255,255,255,.05)}
+    .awards-grid{grid-template-columns:1fr 1fr;gap:34px}
+    section{padding:84px 0}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 22px}
+    .grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">Mason <span>Bleasdell</span></a>
+    <div class="nav-links" id="navlinks">
+      <a href="#about" onclick="closeNav()">About</a>
+      <a href="#listings" onclick="closeNav()">Listings</a>
+      <a href="#sold" onclick="closeNav()">Sold</a>
+      <a href="#results" onclick="closeNav()">Results</a>
+      <a href="#contact" class="nav-cta" onclick="closeNav()">Contact</a>
+    </div>
+    <button class="burger" id="burger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Austin &nbsp;·&nbsp; Texas Hill Country</div>
+    <h1>Real estate with<br><em>relentless</em> intention</h1>
+    <p class="hero-sub">Platinum Top 50 REALTOR® with Mark Martin and Company — pairing lifestyle-first marketing and old-fashioned hustle to sell homes for the most money possible.</p>
+    <div class="hero-cta">
+      <a href="#listings" class="btn btn-primary">View Listings</a>
+      <a href="#contact" class="btn btn-ghost">Work With Mason</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">$100M+</div><div class="lbl">Career Volume</div></div>
+      <div class="stat"><div class="num">148</div><div class="lbl">Closed Sales</div></div>
+      <div class="stat"><div class="num">$84.7M</div><div class="lbl">Recent 5-Yr Value</div></div>
+      <div class="stat"><div class="num">$190K&ndash;$8M</div><div class="lbl">Price Range Served</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <img src="https://imagescdn.homes.com/i2/9Kk-a2bJ49P6GSJRz2atmpNAtxUP6oA6GT4kTutsDRo/117/mason-bleasdell.jpg?p=1" alt="Mason Bleasdell, REALTOR®" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div style="display:none;aspect-ratio:4/5;border:1px solid var(--line);flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#191b20,#23262d);border-radius:2px">
+        <div style="font-family:var(--serif);font-size:34px;color:var(--gold-soft)">Mason Bleasdell</div>
+        <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:10px">REALTOR® · Mark Martin &amp; Co.</div>
+      </div>
+    </div>
+    <div class="about">
+      <div class="eyebrow">About Mason</div>
+      <h2>A marketer first,<br>an agent always</h2>
+      <p>I'm proud of the recognition — Platinum Top 50, Real Producers 500, and over $100M in career sales — but I built my business to serve clients with peerless marketing, clear guidance through the details that matter, and the hustle to find the right buyer for every property.</p>
+      <p>For sellers, I go well beyond the MLS. My team includes a full-time videographer producing lifestyle-first tours of every listing, no matter the price point. Video, strategic professional photography, and genuine effort to put your home in front of real buyers work together to sell for the most money possible.</p>
+      <p>For buyers, my goal is to make you confident through the entire process — the right location, the right home at the right price, and a contract handled backwards and forwards so your deposit stays protected and you stay excited, not stressed.</p>
+      <div class="sign">Trust. Integrity. Responsive.</div>
+      <div class="creds">
+        <div class="cred"><b>Platinum Top 50</b></div>
+        <div class="cred"><b>Real Producers 500</b></div>
+        <div class="cred">GRI · <b>Graduate REALTOR® Institute</b></div>
+        <div class="cred">TX License <b>#0716373</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVE LISTINGS -->
+<section id="listings" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Currently Available</div>
+      <h2>Active Listings</h2>
+      <p>A curated selection of homes and land currently represented by Mason across the greater Austin area.</p>
+      <div class="rule"></div>
+    </div>
+    <div class="grid">
+        <a class="card" href="https://www.homes.com/property/105-hopewell-cir-georgetown-tx/4mqk7w2x69vq8/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/115/4167407494-537277422/105-hopewell-cir-georgetown-tx-primaryphoto.jpg" alt="105 Hopewell Circle" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">105 Hopewell Circle</div><div class="fc">Georgetown, TX</div></div></div><div class="card-body"><div class="card-price">$1,550,000</div><div class="card-addr">105 Hopewell Circle</div><div class="card-city">Georgetown, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>3.5</b> Baths</span><span><b>4,116</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/604-navigator-dr-austin-tx/qcjq1y93c3v4m/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/102/6273879194-099984222/604-navigator-dr-austin-tx-primaryphoto.jpg" alt="604 Navigator Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">604 Navigator Drive</div><div class="fc">Austin, TX</div></div></div><div class="card-body"><div class="card-price">$979,000</div><div class="card-addr">604 Navigator Drive</div><div class="card-city">Austin, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>3.5</b> Baths</span><span><b>3,727</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/112-tellus-st-lakeway-tx/14eg7nhy55czv/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/102/7197739684-864818912/112-tellus-st-lakeway-tx-primaryphoto.jpg" alt="112 Tellus Street" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">112 Tellus Street</div><div class="fc">Lakeway, TX</div></div></div><div class="card-body"><div class="card-price">$799,990</div><div class="card-addr">112 Tellus Street</div><div class="card-city">Lakeway, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>2</b> Baths</span><span><b>2,401</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/3406-spotted-horse-trail-austin-tx/zgee8vnqn3ppw/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/115/5234398594-835333522/3406-spotted-horse-trail-austin-tx-primaryphoto.jpg" alt="3406 Spotted Horse Trail" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">3406 Spotted Horse Trail</div><div class="fc">Austin, TX</div></div></div><div class="card-body"><div class="card-price">$550,000</div><div class="card-addr">3406 Spotted Horse Trail</div><div class="card-city">Austin, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>2</b> Baths</span><span><b>1,943</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/7913-tisdale-dr-austin-tx/9t7n8rmztndyr/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/102/9727668674-469096512/7913-tisdale-dr-austin-tx-primaryphoto.jpg" alt="7913 Tisdale Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">7913 Tisdale Drive</div><div class="fc">Austin, TX</div></div></div><div class="card-body"><div class="card-price">$400,000</div><div class="card-addr">7913 Tisdale Drive</div><div class="card-city">Austin, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>2</b> Baths</span><span><b>1,332</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/5405-park-at-woodlands-dr-austin-tx/fg1qze8q6d99g/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/115/7687963494-318556422/5405-park-at-woodlands-dr-austin-tx-primaryphoto.jpg" alt="5405 Park at Woodlands Dr" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">5405 Park at Woodlands Dr</div><div class="fc">Austin, TX</div></div></div><div class="card-body"><div class="card-price">$350,000</div><div class="card-addr">5405 Park at Woodlands Dr</div><div class="card-city">Austin, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2</b> Baths</span><span><b>1,915</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/5801-pleasanton-pkwy-pflugerville-tx/3gdmzxwclwmvp/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/102/8087165394-330773422/5801-pleasanton-pkwy-pflugerville-tx-primaryphoto.jpg" alt="5801 Pleasanton Parkway" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">5801 Pleasanton Parkway</div><div class="fc">Pflugerville, TX</div></div></div><div class="card-body"><div class="card-price">$329,990</div><div class="card-addr">5801 Pleasanton Parkway</div><div class="card-city">Pflugerville, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2.5</b> Baths</span><span><b>1,912</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/147-zinnia-ct-driftwood-tx/6324f6rdx5wx2/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/102/5510906394-575393422/147-zinnia-ct-driftwood-tx-primaryphoto.jpg" alt="147 Zinnia Court" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">147 Zinnia Court</div><div class="fc">Driftwood, TX</div></div></div><div class="card-body"><div class="card-price">$299,000</div><div class="card-addr">147 Zinnia Court</div><div class="card-city">Driftwood, TX</div><div class="card-specs"><span><b>Land</b></span><span><b>1.48</b> Acres</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/502-atlas-ave-killeen-tx/dyhzm6qsjypk9/" target="_blank" rel="noopener"><div class="card-img"><div class="badge">For Sale</div><img src="https://images.homes.com/listings/102/3247956584-243873812/502-atlas-ave-killeen-tx-primaryphoto.jpg" alt="502 Atlas Avenue" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">502 Atlas Avenue</div><div class="fc">Killeen, TX</div></div></div><div class="card-body"><div class="card-price">$230,000</div><div class="card-addr">502 Atlas Avenue</div><div class="card-city">Killeen, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>2</b> Baths</span><span><b>1,610</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+      </div>
+    <div class="listings-foot">
+      <a href="#contact" class="btn btn-ghost">Inquire About a Property</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOLD -->
+<section id="sold" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Proven Results</div>
+      <h2>Recently Sold</h2>
+      <p>Recent closings from a track record of 148 sales and more than $84.7M in value over the past five years.</p>
+      <div class="rule"></div>
+    </div>
+    <div class="grid">
+        <a class="card" href="https://www.homes.com/property/6903-narrow-oak-trail-austin-tx/wy0pfwx1y7kr7/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/102/8373475274-287765312/6903-narrow-oak-trail-austin-tx-primaryphoto.jpg" alt="6903 Narrow Oak Trail" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">6903 Narrow Oak Trail</div><div class="fc">Austin, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Feb 2026</span>$800,000</div><div class="card-addr">6903 Narrow Oak Trail</div><div class="card-city">Austin, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2.5</b> Baths</span><span><b>1,920</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/605-apache-tears-horseshoe-bay-tx/zcft2ntsg9vjk/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/102/5021317294-089426712/605-apache-tears-horseshoe-bay-tx-primaryphoto.jpg" alt="605 Apache Tears" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">605 Apache Tears</div><div class="fc">Horseshoe Bay, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold May 2026</span>$685,000</div><div class="card-addr">605 Apache Tears</div><div class="card-city">Horseshoe Bay, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2.5</b> Baths</span><span><b>2,432</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/1428-chad-dr-round-rock-tx/6wcr9sbw0n4j4/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/102/3663475274-772965312/1428-chad-dr-round-rock-tx-primaryphoto.jpg" alt="1428 Chad Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">1428 Chad Drive</div><div class="fc">Round Rock, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Mar 2026</span>$589,000</div><div class="card-addr">1428 Chad Drive</div><div class="card-city">Round Rock, TX</div><div class="card-specs"><span><b>5</b> Beds</span><span><b>3.5</b> Baths</span><span><b>3,131</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/2817-turpin-trail-round-rock-tx/2f713tfq1sdxf/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/115/8496634484-376110812/2817-turpin-trail-round-rock-tx-primaryphoto.jpg" alt="2817 Turpin Trail" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">2817 Turpin Trail</div><div class="fc">Round Rock, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold May 2026</span>$475,000</div><div class="card-addr">2817 Turpin Trail</div><div class="card-city">Round Rock, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>3</b> Baths</span><span><b>2,004</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/1632-stone-house-new-braunfels-tx/gf2pc4k3j6r8p/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/102/6552481244-220013102/1632-stone-house-new-braunfels-tx-primaryphoto.jpg" alt="1632 Stone House" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">1632 Stone House</div><div class="fc">New Braunfels, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Feb 2026</span>$452,000</div><div class="card-addr">1632 Stone House</div><div class="card-city">New Braunfels, TX</div><div class="card-specs"><span><b>4</b> Beds</span><span><b>3</b> Baths</span><span><b>3,077</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/232-coral-berry-dr-buda-tx/lxfn60vbc0kym/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/102/1310931774-674857512/232-coral-berry-dr-buda-tx-primaryphoto.jpg" alt="232 Coral Berry Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">232 Coral Berry Drive</div><div class="fc">Buda, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Mar 2026</span>$385,000</div><div class="card-addr">232 Coral Berry Drive</div><div class="card-city">Buda, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2</b> Baths</span><span><b>2,028</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/220-saranac-dr-elgin-tx/fjcppjc5zjj6d/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/115/5811541194-300205812/220-saranac-dr-elgin-tx-primaryphoto.jpg" alt="220 Saranac Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">220 Saranac Drive</div><div class="fc">Elgin, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Jun 2026</span>$299,999</div><div class="card-addr">220 Saranac Drive</div><div class="card-city">Elgin, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2.5</b> Baths</span><span><b>2,501</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/102-camellia-dr-hutto-tx/hp04pgh36dkt2/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/115/0819169184-685382712/102-camellia-dr-hutto-tx-primaryphoto.jpg" alt="102 Camellia Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">102 Camellia Drive</div><div class="fc">Hutto, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Jun 2026</span>$299,900</div><div class="card-addr">102 Camellia Drive</div><div class="card-city">Hutto, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2</b> Baths</span><span><b>1,743</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+        <a class="card" href="https://www.homes.com/property/16355-edgemere-dr-pflugerville-tx/zmmlpmpk04t8l/" target="_blank" rel="noopener"><div class="card-img"><div class="badge sold">Sold</div><img src="https://images.homes.com/listings/102/9444379674-266317512/16355-edgemere-dr-pflugerville-tx-primaryphoto.jpg" alt="16355 Edgemere Drive" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-fallback" style="display:none"><div class="fa">16355 Edgemere Drive</div><div class="fc">Pflugerville, TX</div></div></div><div class="card-body"><div class="card-price"><span class="sold-lbl">Sold Mar 2026</span>$299,999</div><div class="card-addr">16355 Edgemere Drive</div><div class="card-city">Pflugerville, TX</div><div class="card-specs"><span><b>3</b> Beds</span><span><b>2</b> Baths</span><span><b>1,112</b> SqFt</span></div><div class="card-link">View on Homes.com &rarr;</div></div></a>
+      </div>
+  </div>
+</section>
+
+  <!-- AWARDS / RESULTS -->
+<div class="awards" id="results">
+  <div class="wrap">
+    <div class="awards-grid">
+      <div class="award"><h4>Platinum Top 50</h4><p>Austin Award Winner</p></div>
+      <div class="award"><h4>Real Producers 500</h4><p>Top Producing Agents</p></div>
+      <div class="award"><h4>$572.5K</h4><p>Average Sale Price</p></div>
+      <div class="award"><h4>8 Years</h4><p>In the Business</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow">Let's Talk</div>
+    <h2>Ready when you are</h2>
+    <p>Whether you're buying, selling, or simply exploring the market, Mason brings strategy, marketing, and hustle to every conversation. Reach out for a no-pressure consultation.</p>
+    <div class="contact-row">
+      <a href="mailto:mason@masonsellsaustin.com" class="btn btn-primary">Email Mason</a>
+      <a href="tel:+15129837331" class="btn btn-ghost">Call (512) 983-7331</a>
+    </div>
+    <div class="social">
+      <a href="https://www.instagram.com/masonbleasdell/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/masonbleasdell/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.youtube.com/channel/UClSRBjeKZc3qVDWrGkglY8w" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.linkedin.com/in/mason-bleasdell-55678879/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">Mason <span>Bleasdell</span></div>
+    <div class="foot-meta">
+      Mark Martin and Company &nbsp;·&nbsp; Austin, Texas<br>
+      mason@masonsellsaustin.com &nbsp;·&nbsp; TREC License #0716373
+    </div>
+    <div class="disclaimer">
+      Mason Bleasdell is a licensed real estate agent in the State of Texas, brokered by Mark Martin and Company. All property information is deemed reliable but not guaranteed and is subject to change. Equal Housing Opportunity. © <span id="yr"></span> Mason Bleasdell. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav scroll + mobile
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>40); });
+  function toggleNav(){ document.getElementById('navlinks').classList.toggle('open'); }
+  function closeNav(){ document.getElementById('navlinks').classList.remove('open'); }
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
