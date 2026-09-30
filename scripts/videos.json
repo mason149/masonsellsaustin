@@ -1,0 +1,8 @@
+{
+  "_note": "Listing video tours shown as a gold 'Watch the Video Tour' link on listing cards. Key = street number + first word of the street name, lowercase (e.g. '604 navigator'). Value = YouTube video ID.",
+  "604 navigator": "IH6JOZIGjss",
+  "101 broken": "pBFlbv-I384",
+  "817 sun": "O1oc5yFwMWI",
+  "5405 park": "zKui01b6u0s",
+  "13807 fm": "4vuZG989JU4"
+}

@@ -153,6 +153,19 @@ function specs(p) {
   return s;
 }
 
+// Listing video tours (scripts/videos.json): gold "Watch the Video Tour" link under the specs.
+// The whole card is an <a>, so the link is a <span> that opens YouTube without following the card link.
+let VIDEOS = {};
+try { VIDEOS = JSON.parse(readFileSync("scripts/videos.json", "utf8")); } catch { VIDEOS = {}; }
+function videoKey(addr) {
+  return String(addr || "").toLowerCase().replace(/[^a-z0-9 ]/g, "").trim().split(/\s+/).slice(0, 2).join(" ");
+}
+function videoLink(p, isSold) {
+  const id = !isSold && VIDEOS[videoKey(p.addr)];
+  if (!id) return "";
+  return `<span class="card-video" role="link" tabindex="0" onclick="event.preventDefault();event.stopPropagation();window.open('https://www.youtube.com/watch?v=${id}','_blank','noopener')">&#9654; Watch the Video Tour</span>`;
+}
+
 function card(p, isSold) {
   const badge = isSold
     ? '<div class="badge sold">Sold</div>'
@@ -169,7 +182,7 @@ function card(p, isSold) {
     `        <a class="card" href="${p.url}" target="_blank" rel="noopener">` +
     `<div class="card-img">${badge}${img}</div>` +
     `<div class="card-body">${price}<div class="card-addr">${p.addr}</div>` +
-    `<div class="card-city">${p.city}</div><div class="card-specs">${specs(p)}</div>` +
+    `<div class="card-city">${p.city}</div><div class="card-specs">${specs(p)}</div>${videoLink(p, isSold)}` +
     `<div class="card-link">View on Homes.com &rarr;</div></div></a>`
   );
 }
