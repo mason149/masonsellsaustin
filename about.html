@@ -66,6 +66,17 @@ details .a{color:#cfcabf;font-size:16px;margin-top:12px}details .src{font-size:1
 footer{border-top:1px solid var(--line);padding:46px 0;text-align:center}.foot-brand{font-family:var(--serif);font-size:26px;letter-spacing:.04em}.foot-brand span{color:var(--gold)}
 .foot-meta{font-size:12px;color:var(--muted);letter-spacing:.04em;margin-top:14px;line-height:2}.foot-meta a{text-decoration:underline;text-underline-offset:3px}
 .disclaimer{font-size:11px;color:#5f5b54;margin-top:18px;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.8}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:3px;margin:34px 0 10px}
+.stats div{padding:24px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.05)}.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--serif);font-size:44px;font-weight:500;color:var(--gold);line-height:1}.stats span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:10px;line-height:1.5}
+.asof{font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10px}
+.step{border:1px solid var(--line);border-radius:3px;padding:28px 26px;background:var(--bg-2)}.step .n{font-family:var(--serif);font-size:34px;color:var(--gold);line-height:1}
+.step h3{font-size:24px;margin:14px 0 10px;color:var(--ink)}.step p{font-size:14.5px;color:#cfcabf;line-height:1.65}
+.sellbox{border:1px solid var(--gold);border-radius:3px;padding:30px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:rgba(196,165,99,.05)}
+.sellbox h3{font-size:28px;margin:8px 0 6px}.sellbox p{color:var(--muted);font-size:15px;max-width:520px}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.05)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
 @media(max-width:900px){.nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;background:var(--bg-2);flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:transform .4s;border-left:1px solid var(--line)}.nav-links.open{transform:translateX(0)}.burger{display:flex}.cards{grid-template-columns:1fr 1fr}.guide-list{grid-template-columns:1fr}}
 @media(max-width:560px){.wrap,.narrow{padding:0 20px}.cards,.glance{grid-template-columns:1fr}.glance div:nth-child(odd){border-right:0}.chapters{columns:1}.page-head{padding-top:120px}}
 </style>
@@ -109,7 +120,7 @@ footer{border-top:1px solid var(--line);padding:46px 0;text-align:center}.foot-b
 <div class="foot-brand">Mason <span>Bleasdell</span></div>
 <div class="foot-meta">Mark Martin and Company &nbsp;·&nbsp; Austin, Texas<br>
 mason@masonsellsaustin.com &nbsp;·&nbsp; TREC License #0716373<br>
-<a href="/guides">Neighborhood Guides &amp; Answers</a><br>
+<a href="/guides">Neighborhood Guides &amp; Answers</a> &nbsp;·&nbsp; <a href="/selling">Selling Your Home</a><br>
 <a href="/iabs-mason-bleasdell.pdf" target="_blank" rel="noopener">Texas Real Estate Commission Information About Brokerage Services</a> &nbsp;·&nbsp; <a href="https://www.trec.texas.gov/forms/consumer-protection-notice" target="_blank" rel="noopener">Texas Real Estate Commission Consumer Protection Notice</a></div>
 <div class="disclaimer">Mason Bleasdell is a licensed real estate agent in the State of Texas, brokered by Mark Martin and Company. Neighborhood figures such as prices, tax rates, HOA dues, builders and school assignments are as stated at the time of each tour and change often; verify current details before making decisions. Equal Housing Opportunity. © 2026 Mason Bleasdell. All rights reserved.</div>
 </div></footer>
