@@ -1,7 +1,8 @@
 // Refreshes YouTube figures on seller pages (any root *.html with data-yt="..." markers).
 // Markers: video:<id> (view count), sum:<id>.<id>... (total views of those videos), channel:views, channel:subs, channel:videos, asof (Month YYYY).
 // Uses the YouTube Data API when the YT_API_KEY secret is set; otherwise reads public YouTube pages.
-// A number that can't be fetched is left as-is, and "as of" only moves when every figure on that page was refreshed.
+// Last known counts live in scripts/yt-cache.json, so a video YouTube won't return this run keeps its previous count.
+// "As of" only moves on a page when its channel figures and at least 80% of its videos were fetched fresh this run.
 import fs from 'node:fs';
 
 const CHANNEL = '@masonbleasdellaustin';
@@ -31,6 +32,19 @@ async function viaApi() {
   return out;
 }
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const CLIENT = { clientName: 'WEB', clientVersion: '2.20250101.00.00', hl: 'en', gl: 'US' };
+async function videoViews(id) {
+  try {   // InnerTube player API (lighter than the watch page)
+    const r = await fetch('https://www.youtube.com/youtubei/v1/player?prettyPrint=false', { method: 'POST', headers: { ...HEADERS, 'content-type': 'application/json' }, body: JSON.stringify({ context: { client: CLIENT }, videoId: id }) }).then(r => r.json());
+    const n = num(r?.videoDetails?.viewCount); if (n) return n;
+  } catch {}
+  try {
+    const w = await fetch(`https://www.youtube.com/watch?v=${id}`, { headers: HEADERS }).then(r => r.text());
+    return num((w.match(/"viewCount":"(\d+)"/) || [])[1]);
+  } catch { return null; }
+}
+
 async function viaPages() {
   const out = {};
   try {
@@ -39,18 +53,24 @@ async function viaPages() {
     out['channel:subs'] = abbr((a.match(/"subscriberCountText":"([^"]+?) subscribers"/) || [])[1] || '');
     out['channel:videos'] = num((a.match(/"videoCountText":"([\d,]+) videos?"/) || [])[1]);
   } catch (e) { console.log('Channel page failed:', e.message); }
-  for (const id of videoIds) {
-    try {
-      const w = await fetch(`https://www.youtube.com/watch?v=${id}`, { headers: HEADERS }).then(r => r.text());
-      out['video:' + id] = num((w.match(/"viewCount":"(\d+)"/) || [])[1]);
-    } catch (e) { console.log(`Video ${id} failed:`, e.message); }
-    await new Promise(r => setTimeout(r, 800));
+  let todo = videoIds;
+  for (let pass = 0; pass < 3 && todo.length; pass++) {
+    if (pass) { console.log(`Retrying ${todo.length} video(s) after a pause...`); await sleep(30000); }
+    for (const id of todo) { const n = await videoViews(id); if (n) out['video:' + id] = n; await sleep(1200); }
+    todo = todo.filter(id => !out['video:' + id]);
   }
   return out;
 }
 
 const raw = KEY ? await viaApi().catch(e => (console.log('API failed, using pages:', e.message), viaPages())) : await viaPages();
-console.log(`Fetched channel: ${JSON.stringify({views: raw['channel:views'], subs: raw['channel:subs'], videos: raw['channel:videos']})}; videos: ${videoIds.filter(i => raw['video:' + i]).length}/${videoIds.length}`);
+const CACHE = 'scripts/yt-cache.json';
+let cache = {}; try { cache = JSON.parse(fs.readFileSync(CACHE, 'utf8')); } catch {}
+for (const k of Object.keys(raw)) if (raw[k] && cache[k] && raw[k] < cache[k] * 0.9) { console.log(`Ignoring ${k}: ${raw[k]} is well below last known ${cache[k]}`); raw[k] = null; }   // counts shouldn't drop; treat a big drop as a bad read
+const fresh = new Set(Object.keys(raw).filter(k => raw[k]));
+for (const k of fresh) cache[k] = raw[k];
+for (const k of Object.keys(cache)) if (!raw[k]) raw[k] = cache[k];
+fs.writeFileSync(CACHE, JSON.stringify(cache, null, 1) + '\n');
+console.log(`Fetched channel: ${JSON.stringify({views: raw['channel:views'], subs: raw['channel:subs'], videos: raw['channel:videos']})}; videos fresh: ${videoIds.filter(i => fresh.has('video:' + i)).length}/${videoIds.length} (others use last known counts)`);
 
 const fmt = {
   'channel:views': n => `${Math.floor(n / 1000)}K+`,
@@ -65,11 +85,13 @@ let changed = 0;
 for (const f of files) {
   const src = fs.readFileSync(f, 'utf8');
   const keys = [...src.matchAll(MARK)].map(m => m[2]).filter(k => k !== 'asof');
-  const complete = keys.every(k => value(k));
+  const vids = [...new Set(keys.flatMap(k => k.startsWith('video:') ? [k.slice(6)] : k.startsWith('sum:') ? k.slice(4).split('.') : []))];
+  const freshVids = vids.filter(i => fresh.has('video:' + i)).length;
+  const complete = keys.every(k => value(k)) && keys.filter(k => k.startsWith('channel:')).every(k => fresh.has(k)) && (!vids.length || freshVids / vids.length >= 0.8);
   const out = src.replace(MARK, (all, open, k, cur, close) => {
     if (k === 'asof') return complete ? open + asof + close : all;
     const v = value(k); return v ? open + v + close : all;
   });
-  if (out !== src) { fs.writeFileSync(f, out); changed++; console.log(`Updated ${f}${complete ? '' : ' (some figures missing; kept the old "as of" date)'}`); }
+  if (out !== src) { fs.writeFileSync(f, out); changed++; console.log(`Updated ${f}${complete ? '' : ' (not enough fresh figures; kept the old "as of" date)'}`); }
 }
 console.log(`${files.length} page(s) checked, ${changed} updated.`);
