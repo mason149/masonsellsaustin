@@ -2,13 +2,13 @@ name: Monthly YouTube stats refresh
 
 # Updates the YouTube view/subscriber figures on seller pages.
 # Runs on the 1st of each month at 12:17 UTC (~7 AM US Central), whenever a seller page
-# (*--sell.html) is added or changed, and by hand from the Actions tab ("Run workflow").
+# (selling*.html) is added or changed, and by hand from the Actions tab ("Run workflow").
 on:
   schedule:
     - cron: "17 12 1 * *"
   push:
     branches: [main]
-    paths: ["*--sell.html"]
+    paths: ["selling*.html"]
   workflow_dispatch: {}
 
 permissions:
