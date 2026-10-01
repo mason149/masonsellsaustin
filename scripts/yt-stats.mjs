@@ -1,5 +1,5 @@
 // Refreshes YouTube figures on seller pages (any root *.html with data-yt="..." markers).
-// Markers: video:<id> (view count), channel:views, channel:subs, channel:videos, asof (Month YYYY).
+// Markers: video:<id> (view count), sum:<id>.<id>... (total views of those videos), channel:views, channel:subs, channel:videos, asof (Month YYYY).
 // Uses the YouTube Data API when the YT_API_KEY secret is set; otherwise reads public YouTube pages.
 // A number that can't be fetched is left as-is, and "as of" only moves when every figure on that page was refreshed.
 import fs from 'node:fs';
@@ -14,7 +14,7 @@ if (!files.length) { console.log('No pages with YouTube figures yet.'); }
 
 const wanted = new Set();
 for (const f of files) for (const m of fs.readFileSync(f, 'utf8').matchAll(MARK)) wanted.add(m[2]);
-const videoIds = [...wanted].filter(k => k.startsWith('video:')).map(k => k.slice(6));
+const videoIds = [...new Set([...wanted].flatMap(k => k.startsWith('video:') ? [k.slice(6)] : k.startsWith('sum:') ? k.slice(4).split('.') : []))];
 
 const num = s => { const n = Number(String(s).replace(/[^\d]/g, '')); return Number.isFinite(n) && n > 0 ? n : null; };
 const abbr = s => { const m = String(s).replace(/,/g, '').match(/([\d.]+)\s*([KM]?)/i); if (!m) return null; const n = parseFloat(m[1]) * ({ K: 1e3, M: 1e6 }[m[2].toUpperCase()] || 1); return n > 0 ? Math.round(n) : null; };
@@ -50,13 +50,14 @@ async function viaPages() {
 }
 
 const raw = KEY ? await viaApi().catch(e => (console.log('API failed, using pages:', e.message), viaPages())) : await viaPages();
-console.log('Fetched:', JSON.stringify(raw));
+console.log(`Fetched channel: ${JSON.stringify({views: raw['channel:views'], subs: raw['channel:subs'], videos: raw['channel:videos']})}; videos: ${videoIds.filter(i => raw['video:' + i]).length}/${videoIds.length}`);
 
 const fmt = {
   'channel:views': n => `${Math.floor(n / 1000)}K+`,
   'channel:subs': n => n >= 1000 ? `${(Math.floor(n / 100) / 10).toFixed(1).replace(/\.0$/, '')}K` : String(n),
   'channel:videos': n => n.toLocaleString('en-US'),
 };
+for (const k of wanted) if (k.startsWith('sum:')) { const ids = k.slice(4).split('.'); raw[k] = ids.every(i => raw['video:' + i]) ? ids.reduce((a, i) => a + raw['video:' + i], 0) : null; }
 const value = k => { const n = raw[k]; if (!n) return null; return (fmt[k] || (x => x.toLocaleString('en-US')))(n); };
 const asof = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'America/Chicago' });
 
